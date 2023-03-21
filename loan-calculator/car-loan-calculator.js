@@ -26,7 +26,7 @@ prompt(MESSAGE['welcome']);
 
 while (true) {
   prompt('---------------------------------');
-  
+
   prompt(MESSAGE['loanAmount']);
   let loanAmount = READLINE.question();
 
