@@ -1,0 +1,43 @@
+{
+  "languageInput" : "Choose a language: english, francais, or deutsch.",
+  "validLanguages" : ["english", "francais", "deutsch"],
+  "invalidLanguage": "That is not a valid language.",
+  "language": [
+    {
+      "welcome": "Welcome to the Calculator!",
+      "firstNum": "What is the first number?",
+      "secondNum": "What is the second number?",
+      "invalidInput": "Hmmm... that doesn't look like a valid number.",
+      "operation": "What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide",
+      "invalidOperation": "Operation must be 1, 2, 3, or 4!",
+      "result": "The result is ",
+      "continueCalculating": "Would you like to perform another calculation?(Y/N)",
+      "yes": "Y"
+    },
+    {
+        "language": "francais",
+        "welcome": "Bienvenue au calculateur!",
+        "firstNum": "Quel est ton premier nombre?",
+        "secondNum": "Quel est ton deuxième nombre?",
+        "invalidInput": "Hmmm... ce n'est pas un numéro valide.",
+        "operation": "Quelle opération souhaitez-vous effectuer?\n1) Addition 2) Soustraction 3) Multiplication 4) Division",
+        "invalidOperation": "La opération doit être 1, 2, 3, ou 4!",
+        "result": "Le résult est ",
+        "continueCalculating": "Souhaitez-vous effectuer un autre calcul? (O/N)",
+        "yes": "O"
+      },
+    {
+      "language": "deutsch",
+      "welcome": "Willkommen beim Rechner!",
+      "firstNum": "Was ist deine erste Nummer?",
+      "secondNum": "Wie lautet Ihre zweite Zahl?",
+      "invalidInput": "Hmmm... das ist keine gültige Nummer.",
+      "operation": "Welche Operation möchten Sie durchführen?\n1) Zusatz 2) Subtraktion 3) Multiplikation 4) Aufteilung",
+      "invalidOperation": "Operation muss 1, 2, 3 oder 4 sein!",
+      "result": "Das Ergebnis ist ",
+      "continueCalculating": "Möchten Sie eine weitere Berechnung durchführen? (J/N)",
+      "yes": "J"
+    }
+  ]
+  
+}

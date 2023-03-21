@@ -1,0 +1,10 @@
+{
+  "welcome": "Welcome to the Loan Calculator!",
+  "loanAmount": "How much would you like to loan?",
+  "annualPercentRate": "What is the Annual Percentage Rate (APR) (enter a number from 1-100)?",
+  "loanDuration": "What is the loan duration in months? (enter a number from 1-360)",
+  "invalidInput": "Hmmm... that is not valid input.",
+  "result": "The result is ",
+  "continueCalculating": "Would you like to perform another loan calculation? (Y/N)",
+  "yes": "Y"
+}
