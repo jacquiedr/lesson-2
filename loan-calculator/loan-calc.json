@@ -1,0 +1,11 @@
+{
+  "welcome": "Welcome to the Loan Calculator!",
+  "farewell": "Thank you for using the Loan Calculator, see you next time!",
+  "loanAmount": "How much would you like to loan? (in CAD)",
+  "annualPercentRate": "What is the Annual Percentage Rate (APR)?",
+  "loanDurInMonths": "What is the loan duration in months? (enter a number from 1-360)",
+  "invalidInput": "Hmmm... that is not valid input.",
+  "result": "The result is ",
+  "continueCalculating": "Would you like to perform another loan calculation? (Yes/No)",
+  "yes": ["Y", "yes", "Yes", "y"]
+}
