@@ -122,13 +122,13 @@ function displayWinnerOfRound(userChoice, computerChoice) {
 /**
  * Update round count.
  *
- * @param {number} roundCount - The current game count
+ * @param {number} countOfRounds - The current game count
  * @param {number} incrementor - By how much we want to increment the
  *                               game's count
  * @returns {number} - Returns update game count
  */
-function incrementroundCount(roundCount, incrementor) {
-  return roundCount + incrementor;
+function incrementcountOfRounds(countOfRounds, incrementor) {
+  return countOfRounds + incrementor;
 }
 
 /**
@@ -235,14 +235,14 @@ function resetComputerScore(computerScore, number) {
 /**
  * Reset user score to number
  *
- * @param {number} roundCount - The current number of games that has been
+ * @param {number} countOfRounds - The current number of games that has been
  *                              played.
- * @param {number} number - The number to which roundCount will be reset.
- * @returns {number} - Returns new number roundCount has been reset to.
+ * @param {number} number - The number to which countOfRounds will be reset.
+ * @returns {number} - Returns new number countOfRounds has been reset to.
  */
-function resetroundCount(roundCount, number) {
-  roundCount = number;
-  return roundCount;
+function resetcountOfRounds(countOfRounds, number) {
+  countOfRounds = number;
+  return countOfRounds;
 }
 
 /**
@@ -267,11 +267,11 @@ displayMessage(RPS_MESSAGES['welcome']);
 // Continue looping until the user chooses to exit.
 while (true) {
   // Initialize round count and player scores
-  let roundCount = 0;
+  let countOfRounds = 0;
   let userScore = 0;
   let computerScore = 0;
   // Continue looping through RPSLS game for 5 rounds
-  while (roundCount < NUMBER_OF_ROUNDS) {
+  while (countOfRounds < NUMBER_OF_ROUNDS) {
     printSeperator();
 
     let userChoice = getUserChoice();
@@ -287,11 +287,11 @@ while (true) {
     computerScore = updateComputerScore(result, computerScore, 1);
 
     // Only display player's current scores while we are not at the last round
-    if (roundCount < NUMBER_OF_ROUNDS - 1) {
+    if (countOfRounds < NUMBER_OF_ROUNDS - 1) {
       printSeperator();
       displayCurrentScore(userScore, computerScore, NUMBER_OF_ROUNDS);
     }
-    roundCount = incrementroundCount(roundCount, 1);
+    countOfRounds = incrementcountOfRounds(countOfRounds, 1);
   }
   printSeperator();
 
@@ -306,7 +306,7 @@ while (true) {
     break;
   } else {
     // Reset player scores and round count for next game
-    resetroundCount(roundCount, 0);
+    resetcountOfRounds(countOfRounds, 0);
     resetComputerScore(computerScore, 0);
     resetUserScore(userScore, 0);
     console.clear();
