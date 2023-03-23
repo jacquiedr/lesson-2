@@ -16,6 +16,7 @@ const WINNING_COMBOS = {
   spock: ['scissors', 'rock'],
   lizard: ['spock', 'paper']
 };
+const NUMBER_OF_ROUNDS = 5;
 
 
 /**
@@ -36,6 +37,34 @@ function printSeperator() {
  */
 function displayMessage(msg) {
   console.log(`=> ${msg}`);
+}
+
+/**
+ * Gets user input
+ *
+ * @returns {string} User input.
+ */
+function getUserChoice() {
+  displayMessage(`${RPS_MESSAGES['chooseRPSLS']}`);
+  let userChoice = readline.question().toLowerCase();
+  return userChoice;
+}
+
+/**
+ * Validates user input by checking if it is in valid choice and if it is long
+ * short input, turning it into the full word.
+ *
+ * @returns {string} User input modified.
+ */
+function validateUserChoice(userChoice) {
+  while (!VALID_CHOICES.includes(userChoice)) {
+    displayMessage(RPS_MESSAGES['invalidChoice']);
+    userChoice = readline.question();
+  }
+  if (SHORT_INPUTS.hasOwnProperty(userChoice)) {
+    userChoice = SHORT_INPUTS[userChoice];
+  }
+  return userChoice;
 }
 
 /**
@@ -77,12 +106,13 @@ function computeWinnerOfRound(userChoice, computerChoice) {
  * @param {string} computerChoice - The computer's randomly-generated choice.
  * @returns {void}
  */
-function displayWinnerOfRound (userChoice, computerChoice) {
+function displayWinnerOfRound(userChoice, computerChoice) {
   displayMessage(`You chose ${userChoice}. Computer chose ${computerChoice}.`);
 
-  if (WINNING_COMBOS[userChoice].includes(computerChoice)) {
+  let winner = computeWinnerOfRound(userChoice, computerChoice);
+  if (winner === 'user') {
     displayMessage(RPS_MESSAGES['userWonRound']);
-  } else if (WINNING_COMBOS[computerChoice].includes(userChoice)) {
+  } else if (winner === 'computer') {
     displayMessage(RPS_MESSAGES['computerWonRound']);
   } else {
     displayMessage(RPS_MESSAGES['roundTie']);
@@ -90,11 +120,56 @@ function displayWinnerOfRound (userChoice, computerChoice) {
 }
 
 /**
+ * Update round count.
+ *
+ * @param {number} gameCount - The current game count
+ * @param {number} incrementor - By how much we want to increment the
+ *                               game's count
+ * @returns {number} - Returns update game count
+ */
+function incrementGameCount(gameCount, incrementor) {
+  return gameCount + incrementor;
+}
+
+/**
+ * Update user score.
+ *
+ * @param {number} userScore - The current user's score
+ * @param {number} incrementor - By how much we want to increment the
+ *                               user's score
+ * @returns {number} - Returns updated user's score
+ */
+function updateUserScore(result, userScore, incrementor) {
+  if (result === 'user') {
+    userScore += incrementor;
+    return userScore;
+  }
+  return userScore;
+}
+
+/**
+ * Update computer's score.
+ *
+ * @param {number} computerScore - The current computer's score
+ * @param {number} incrementor - By how much we want to increment the
+ *                               computer's score
+ * @returns {number} - Returns updated computer's score
+ */
+function updateComputerScore(result, computerScore, incrementor) {
+  if (result === 'computer') {
+    computerScore += incrementor;
+    return computerScore;
+  }
+  return computerScore;
+}
+
+
+/**
  * Displays overall winner to console based off final scores of
  * both players.
  *
- * @param {string} userChoice - The user inputted choice.
- * @param {string} computerChoice - The computer's randomly-generated choice.
+ * @param {number} userScore - The user's score
+ * @param {number} computerScore - The computer's score
  * @returns {void}
  */
 function displayOverallWinner(userScore, computerScore) {
@@ -108,81 +183,130 @@ function displayOverallWinner(userScore, computerScore) {
 }
 
 /**
- * Displays final scores of both players.
+ * Displays current scores of both players.
  *
- * @param {string} userChoice - The user inputted choice.
- * @param {string} computerChoice - The computer's randomly-generated choice.
+ * @param {number} userScore - The user's score
+ * @param {number} computerScore - The computer's score
+ * @param {number} numberOfRounds - The number of rounds of games in total
  * @returns {void}
  */
-function displayFinalScore(userScore, computerScore) {
-  displayMessage(`Your final score: ${Number(userScore)} / 5`);
-  displayMessage(`Computer's final score: ${Number(computerScore)} / 5`);
+function displayCurrentScore(userScore, computerScore, numberOfRounds) {
+  displayMessage(`Your current score: ${Number(Math.floor(userScore))} / ${numberOfRounds}`);
+  displayMessage(`Computer's current score: ${Number(Math.floor(computerScore))} / ${numberOfRounds}`);
+}
+
+/**
+ * Displays final scores of both players.
+ *
+ * @param {number} userScore - The user's score
+ * @param {number} computerScore - The computer's score
+ * @param {number} numberOfRounds - The number of rounds of games in total
+ * @returns {void}
+ */
+function displayFinalScore(userScore, computerScore, numberOfRounds) {
+  displayMessage(`Your final score: ${Number(Math.floor(userScore))} / ${numberOfRounds}`);
+  displayMessage(`Computer's final score: ${Number(Math.floor(computerScore))} / ${numberOfRounds}`);
+}
+
+/**
+ * Reset user score to number
+ *
+ * @param {number} userScore - The user's score
+ * @param {number} number - The number to which userScore will be reset.
+ * @returns {number} - Returns new number userScore has been reset to.
+ */
+function resetUserScore(userScore, number) {
+  userScore = number;
+  return userScore;
+}
+
+/**
+ * Reset user score to number
+ *
+ * @param {number} computerScore - The computer's score
+ * @param {number} number - The number to which computerScore will be reset.
+ * @returns {number} - Returns new number computerScore has been reset to.
+ */
+function resetComputerScore(computerScore, number) {
+  computerScore = number;
+  return computerScore;
+}
+
+/**
+ * Reset user score to number
+ *
+ * @param {number} gameCount - The current number of games that has been played.
+ * @param {number} number - The number to which gameCount will be reset.
+ * @returns {number} - Returns new number gameCount has been reset to.
+ */
+function resetGameCount(gameCount, number) {
+  gameCount = number;
+  return gameCount;
+}
+
+/**
+ * Asks user if they wish to play another game
+ *
+ * @returns {bool} - Returns the user's input and validates
+ *                     if they said yes or no.
+ */
+function askToContinuePlaying() {
+  displayMessage(RPS_MESSAGES['askToContinue']);
+  let answer = readline.question();
+  while ((!RPS_MESSAGES['yes'].includes(answer)) &&
+         (!RPS_MESSAGES['no'].includes(answer))) {
+    displayMessage(RPS_MESSAGES['invalidAnswer']);
+    answer = readline.question();
+  }
+  return RPS_MESSAGES['yes'].includes(answer);
 }
 
 
-// Initialize game count and player scores
-let gameCount = 0;
-let userScore = 0;
-let computerScore = 0;
-
 displayMessage(RPS_MESSAGES['welcome']);
-
 // Continue looping until the user chooses to exit.
 while (true) {
+  // Initialize game count and player scores
+  let gameCount = 0;
+  let userScore = 0;
+  let computerScore = 0;
   // Continue looping through RPSLS game for 5 rounds
-  while (gameCount < 5) {
+  while (gameCount < NUMBER_OF_ROUNDS) {
     printSeperator();
 
-    displayMessage(`${RPS_MESSAGES['chooseRPSLS']}`);
-    let userChoice = readline.question();
-
-    while (!VALID_CHOICES.includes(userChoice)) {
-      displayMessage(RPS_MESSAGES['invalidChoice']);
-      userChoice = readline.question();
-    }
-    if (SHORT_INPUTS.hasOwnProperty(userChoice)) {
-      userChoice = SHORT_INPUTS[userChoice];
-    }
-
+    let userChoice = getUserChoice();
+    userChoice = validateUserChoice(userChoice);
     let computerChoice = getComputerChoice();
 
     printSeperator();
 
     displayWinnerOfRound(userChoice, computerChoice);
+
     let result = computeWinnerOfRound(userChoice, computerChoice);
-    // Add score based off who won the round
-    if (result === 'user') {
-      userScore += 1;
-    } else if (result === 'computer') {
-      computerScore += 1;
-    } else if (result === 'tie') {
-      userScore += 0.5;
-      computerScore += 0.5;
+    userScore = updateUserScore(result, userScore, 1);
+    computerScore = updateComputerScore(result, computerScore, 1);
+
+    // Only display while we are not at that end of the last round
+    if (gameCount < NUMBER_OF_ROUNDS - 1) {
+      printSeperator();
+      displayCurrentScore(userScore, computerScore, NUMBER_OF_ROUNDS);
     }
-    gameCount += 1;
+    gameCount = incrementGameCount(gameCount, 1);
   }
   printSeperator();
 
-  displayFinalScore(userScore, computerScore);
+  displayFinalScore(userScore, computerScore, NUMBER_OF_ROUNDS);
   displayOverallWinner(userScore, computerScore);
 
   printSeperator();
 
   // Ask user if they wish to play another game
-  displayMessage(RPS_MESSAGES['askToContinue']);
-  let answer = readline.question().toLowerCase();
-
-  while (answer[0] !== 'y' && answer[0] !== 'n') {
-    displayMessage(RPS_MESSAGES['invalidAnswer']);
-    answer = readline.question().toLowerCase();
-  }
-  if (answer[0] !== 'y') {
+  if (!askToContinuePlaying()) {
     displayMessage(RPS_MESSAGES['farewell']);
     break;
   } else {
+    resetGameCount(gameCount, 0);
+    resetComputerScore(computerScore, 0);
+    resetUserScore(userScore, 0);
     console.clear();
-    gameCount = 0;
-    userScore = 0;
-    computerScore = 0;
   }
 }

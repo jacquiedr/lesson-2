@@ -1,5 +1,5 @@
 {
-  "welcome": "Welcome to Rock, Paper, Scissors, Lizard, Spock. This is just like your regular old game of Rock, Paper, Scissors, but with a slight twist.",
+  "welcome": "Welcome to Rock, Paper, Scissors, Lizard, Spock. This is just like your regular old game of Rock, Paper, Scissors, but with a slight twist.\n=> You will be playing for best out of five rounds with Computer. You ready?",
   "chooseRPSLS": "Choose one: 'r' for rock, 'p' for paper, 'sc' for scissors, 'sp' for spock, or 'l' for lizard.",
   "invalidChoice": "That's not a valid choice.",
   "userWonRound": "You won the round!",
@@ -10,5 +10,7 @@
   "computerWonOverall": "Computer was the overall winner. Good game!",
   "userWonOverall": "You were the overall winner. Congratulations!",
   "overallTie": "The game was a tie. What are the odds?",
+  "yes": ["y", "Y", "yes", "YES", "Yes"],
+  "no": ["n", "N", "no", "No", "NO"],
   "farewell": "Thanks for playing Rock, Paper, Scissors, Lizard, Spock. See you next time!"
 }
