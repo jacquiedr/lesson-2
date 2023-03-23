@@ -7,6 +7,7 @@ const MESSAGE = require('./loan-calc.json');
 const TO_DECIMAL_POINT = 100;
 const YEAR = 12;
 
+
 /**
  * Adds an arrow symbol (=>) in front of a given string input to
  * differentiate console logs vs. user input.
@@ -18,6 +19,7 @@ function prompt(msg) {
   console.log(`=> ${msg}`);
 }
 
+
 /**
  * Prints a string of dashes to the console to act as a separator.
  *
@@ -26,6 +28,7 @@ function prompt(msg) {
 function printSeperator() {
   prompt('---------------------------------');
 }
+
 
 /**
  * Check if the given input `num` is a valid number.
@@ -39,6 +42,7 @@ function invalidNumber(num) {
   return Number.isNaN(Number(num)) ||
         Number(num) < 0;
 }
+
 
 /**
  * Check if the given input `num` is a valid number of months.
@@ -57,6 +61,7 @@ function invalidMonth(num) {
   invalidNumber(num);
 }
 
+
 /**
  * Takes 'msg' (a key from JSON file) as the argument and
  * displays its JSON value to the user.
@@ -68,6 +73,7 @@ function invalidMonth(num) {
 function displayMessage(msg) {
   prompt(MESSAGE[msg]);
 }
+
 
 /**
  * Prompts the user to enter a value for the given key and validates the input
@@ -84,7 +90,6 @@ function displayMessage(msg) {
  *                     after it has been validated against the provided
  *                     validation function.
  */
-
 function getUserInput(key, validFcn) {
   prompt(MESSAGE[key]);
   let input = parseFloat(READLINE.question());
@@ -95,6 +100,7 @@ function getUserInput(key, validFcn) {
   }
   return input;
 }
+
 
 /**
  * Using the given formula, the user's monthly payment is calculated
@@ -119,6 +125,7 @@ function computeMonthlyPayment(loanAmount, annualPercentRate, loanDurInMonths) {
   return monthlyPayment;
 }
 
+
 /**
  * Displays user's input and their final computed monthly payment.
  *
@@ -128,7 +135,7 @@ function computeMonthlyPayment(loanAmount, annualPercentRate, loanDurInMonths) {
  *                                            annual percent rate.
  * @param {string|number} loanDurInMonths - The input number of the user's
  *                                          loan durartion in months.
- * *@param {string|number} monthlyPayment - The input number of the user's
+ * @param {string|number} monthlyPayment - The input number of the user's
  *                                          computed monthly payment.
  * @returns {void}
  */
@@ -136,6 +143,7 @@ function computeMonthlyPayment(loanAmount, annualPercentRate, loanDurInMonths) {
 function displayMonthlyPayment(loanAmount, annualPercentRate, loanDurInMonths, monthlyPayment) {
   prompt(`For a $${loanAmount} loan at ${annualPercentRate}% with a ${loanDurInMonths} month loan duration, your monthly payment will be $${monthlyPayment.toFixed(2)}.`);
 }
+
 
 /**
  * Asks user to input 'yes' or 'no' based on if they
