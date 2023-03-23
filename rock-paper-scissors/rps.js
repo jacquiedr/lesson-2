@@ -59,7 +59,7 @@ function getComputerChoice() {
  *                     computer won the round, and 'tie' if the round was a
  *                     tie.
  */
-function computeWinner(userChoice, computerChoice) {
+function computeWinnerOfRound(userChoice, computerChoice) {
   if (WINNING_COMBOS[userChoice].includes(computerChoice)) {
     return 'user';
   } else if (WINNING_COMBOS[computerChoice].includes(userChoice)) {
@@ -149,7 +149,7 @@ while (true) {
     printSeperator();
 
     displayWinnerOfRound(userChoice, computerChoice);
-    let result = computeWinner(userChoice, computerChoice);
+    let result = computeWinnerOfRound(userChoice, computerChoice);
     // Add score based off who won the round
     if (result === 'user') {
       userScore += 1;
