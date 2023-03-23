@@ -154,6 +154,7 @@ function userWantsToContinue() {
 
 displayMessage("welcome");
 
+// Continue looping until the user chooses to exit.
 while (true) {
 
   printSeperator();
