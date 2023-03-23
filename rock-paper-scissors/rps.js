@@ -305,7 +305,8 @@ while (true) {
     displayMessage(RPS_MESSAGES['farewell']);
     break;
   } else {
-    // Reset player scores and round count for next game
+    // If player wants to keep playing,
+    // Reset player scores and round count to 0 for next game
     resetcountOfRounds(countOfRounds, 0);
     resetComputerScore(computerScore, 0);
     resetUserScore(userScore, 0);
