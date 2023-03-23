@@ -122,13 +122,13 @@ function displayWinnerOfRound(userChoice, computerChoice) {
 /**
  * Update round count.
  *
- * @param {number} gameCount - The current game count
+ * @param {number} roundCount - The current game count
  * @param {number} incrementor - By how much we want to increment the
  *                               game's count
  * @returns {number} - Returns update game count
  */
-function incrementGameCount(gameCount, incrementor) {
-  return gameCount + incrementor;
+function incrementroundCount(roundCount, incrementor) {
+  return roundCount + incrementor;
 }
 
 /**
@@ -235,13 +235,14 @@ function resetComputerScore(computerScore, number) {
 /**
  * Reset user score to number
  *
- * @param {number} gameCount - The current number of games that has been played.
- * @param {number} number - The number to which gameCount will be reset.
- * @returns {number} - Returns new number gameCount has been reset to.
+ * @param {number} roundCount - The current number of games that has been
+ *                              played.
+ * @param {number} number - The number to which roundCount will be reset.
+ * @returns {number} - Returns new number roundCount has been reset to.
  */
-function resetGameCount(gameCount, number) {
-  gameCount = number;
-  return gameCount;
+function resetroundCount(roundCount, number) {
+  roundCount = number;
+  return roundCount;
 }
 
 /**
@@ -266,11 +267,11 @@ displayMessage(RPS_MESSAGES['welcome']);
 // Continue looping until the user chooses to exit.
 while (true) {
   // Initialize game count and player scores
-  let gameCount = 0;
+  let roundCount = 0;
   let userScore = 0;
   let computerScore = 0;
   // Continue looping through RPSLS game for 5 rounds
-  while (gameCount < NUMBER_OF_ROUNDS) {
+  while (roundCount < NUMBER_OF_ROUNDS) {
     printSeperator();
 
     let userChoice = getUserChoice();
@@ -285,12 +286,12 @@ while (true) {
     userScore = updateUserScore(result, userScore, 1);
     computerScore = updateComputerScore(result, computerScore, 1);
 
-    // Only display while we are not at that end of the last round
-    if (gameCount < NUMBER_OF_ROUNDS - 1) {
+    // Only display player's current scores while we are not at the last round
+    if (roundCount < NUMBER_OF_ROUNDS - 1) {
       printSeperator();
       displayCurrentScore(userScore, computerScore, NUMBER_OF_ROUNDS);
     }
-    gameCount = incrementGameCount(gameCount, 1);
+    roundCount = incrementroundCount(roundCount, 1);
   }
   printSeperator();
 
@@ -299,12 +300,13 @@ while (true) {
 
   printSeperator();
 
-  // Ask user if they wish to play another game
+  // Ask user if they want to play another game
   if (!askToContinuePlaying()) {
     displayMessage(RPS_MESSAGES['farewell']);
     break;
   } else {
-    resetGameCount(gameCount, 0);
+    // Reset player scores and game count for next game
+    resetroundCount(roundCount, 0);
     resetComputerScore(computerScore, 0);
     resetUserScore(userScore, 0);
     console.clear();
