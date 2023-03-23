@@ -251,7 +251,7 @@ function resetcountOfRounds(countOfRounds, number) {
  * @returns {bool} - Returns the user's input and validates
  *                     if they said yes or no.
  */
-function askToContinuePlaying() {
+function continuePlaying() {
   displayMessage(RPS_MESSAGES['askToContinue']);
   let answer = readline.question();
   while ((!RPS_MESSAGES['yes'].includes(answer)) &&
@@ -301,7 +301,7 @@ while (true) {
   printSeperator();
 
   // Ask user if they want to play another game
-  if (!askToContinuePlaying()) {
+  if (!continuePlaying()) {
     displayMessage(RPS_MESSAGES['farewell']);
     break;
   } else {
