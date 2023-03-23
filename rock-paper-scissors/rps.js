@@ -266,7 +266,7 @@ function askToContinuePlaying() {
 displayMessage(RPS_MESSAGES['welcome']);
 // Continue looping until the user chooses to exit.
 while (true) {
-  // Initialize game count and player scores
+  // Initialize round count and player scores
   let roundCount = 0;
   let userScore = 0;
   let computerScore = 0;
@@ -305,7 +305,7 @@ while (true) {
     displayMessage(RPS_MESSAGES['farewell']);
     break;
   } else {
-    // Reset player scores and game count for next game
+    // Reset player scores and round count for next game
     resetroundCount(roundCount, 0);
     resetComputerScore(computerScore, 0);
     resetUserScore(userScore, 0);
