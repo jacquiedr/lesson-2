@@ -1,10 +1,5 @@
-let x = 5;
-
-function foo() {
-  let x = 10;
-  console.log(x);
-}
+(function foo() {
+  console.log('hi');
+});
 
 foo();
-console.log(x);
-
